@@ -4,24 +4,22 @@ import math, random
 class BillSplitter:
 
     def __init__(self):
-        # instance attributes
         self.friends_dict = {}
         self.total_bill = 0.0
         self.friend_num = 0
         self.using_luck = False
         self.lucky = ''
 
+    def open_bill(self):
         # main logic
         self.get_friend_num()
         if self.friend_num > 0:
             self.get_names()
             self.get_bill()
             self.get_lucky()
-            self.calculate_bills()
+            self.calculate_and_print_bills()
         else:
             print('No one is sharing the bill')
-
-    # instance methods
     def get_friend_num(self):
         try:
             self.friend_num = int(input('Enter the number of friends joining (including you):\n'))
@@ -62,7 +60,7 @@ class BillSplitter:
             print('Please type Yes or No')
             self.get_lucky()
 
-    def calculate_bills(self):
+    def calculate_and_print_bills(self):
         if self.using_luck:
             for name in self.friends_dict:
                 if name != self.lucky:
@@ -73,4 +71,4 @@ class BillSplitter:
                 {key: round(value + self.total_bill / self.friend_num, 2) for key, value in self.friends_dict.items()})
 
 
-BillSplitter()
+BillSplitter().open_bill()
